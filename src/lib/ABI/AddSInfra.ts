@@ -1,4 +1,4 @@
-const AddSInfra = [
+export const AddSInfra = [
   {
     inputs: [],
     stateMutability: "nonpayable",
@@ -90,4 +90,4 @@ const AddSInfra = [
   },
 ];
 
-export default AddSInfra;
+export const AddSInfraAddress = '0x920CCb77F0C95791af4203a7b3bf244da01564aC';

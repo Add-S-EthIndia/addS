@@ -11,6 +11,10 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useAccount, useContractWrite } from 'wagmi'
+import {PoolFactory, PoolFactoryAddress} from "../../lib/ABI/PoolFactory";
+import { useEffect } from "react";
+
 const formSchema = z.object({
   name: z.string(),
   email: z.string().email(),
@@ -28,6 +32,20 @@ const formSchema = z.object({
 });
 
 const AddNewCampaign = () => {
+
+  const { address } = useAccount();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const addSInfra: any = {
+    address: PoolFactoryAddress,
+    abi: PoolFactory,
+  };
+
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    ...addSInfra,
+    functionName: 'deployAdvertiserContract',
+  })
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,13 +62,32 @@ const AddNewCampaign = () => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmitForm = (e:any) => {
     e.preventDefault();
     console.log("call the functiona of blockchain");
     console.log("this is the values of form schema ");
     const { getValues } = form;
-    console.log("al value", getValues());
+    
+    const formData = getValues()
+    console.log("al value", formData);
+
+    write({args: [
+      formData.name,
+      formData.website,
+      address,
+      formData.setBribePercentage,
+      formData.setAmountForPool,
+      "https://bafybeibgqcss3pktjmutmov7t46isuyvbxxykgmvnsxybpus7wbmevpkzi.ipfs.dweb.link/", // add IPFS hash
+      formData.setMinimumTransactionAmount,
+      ['WalletX']
+      
+    ]})
   };
+
+  useEffect(() => {
+console.log({data})
+  }, [isLoading, isSuccess])
 
   return (
     <div className="w-[50%] flex flex-col justify-start items-center gap-5 ">
@@ -80,7 +117,7 @@ const AddNewCampaign = () => {
               }}
             />
             {/* email address  */}
-            <FormField
+            {/* <FormField
               control={form.control}
               name="email"
               render={({ field }) => {
@@ -98,7 +135,7 @@ const AddNewCampaign = () => {
                   </FormItem>
                 );
               }}
-            />
+            /> */}
             {/* Website  */}
             <FormField
               control={form.control}
@@ -140,7 +177,7 @@ const AddNewCampaign = () => {
               }}
             /> */}
             {/* name of the campaigne  */}
-            <FormField
+            {/* <FormField
               control={form.control}
               name="campaignName"
               render={({ field }) => {
@@ -160,7 +197,7 @@ const AddNewCampaign = () => {
                   </FormItem>
                 );
               }}
-            />
+            /> */}
             {/* media of campaigne  set the size in the validations */}
             <FormField
               control={form.control}
@@ -235,7 +272,7 @@ const AddNewCampaign = () => {
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel>Bribe Capital for Advertisement</FormLabel>
+                    <FormLabel>Pool Capital for Advertisement</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Total Ad Capital"
@@ -259,10 +296,10 @@ const AddNewCampaign = () => {
               render={({ field }) => {
                 return (
                   <FormItem>
-                    <FormLabel> Bribe Percentage for service fee</FormLabel>
+                    <FormLabel> Percentage for service fee</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Bribe% over and above gas fees"
+                        placeholder="Pool fees % over and above gas fees"
                         type="number"
                         {...field}
                         onChange={(event) =>

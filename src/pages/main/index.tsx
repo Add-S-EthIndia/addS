@@ -4,28 +4,40 @@ import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import { useContractReads } from "wagmi";
+// import { readContracts } from "@wagmi/core";
+import { getNetwork } from '@wagmi/core'
 
-import AddSInfra from "../../lib/ABI/AddSInfra";
+import {AddSInfra, AddSInfraAddress} from "../../lib/ABI/AddSInfra";
 
 const Main = () => {
   const [openDashboard, setOpenDashboard] = useState<string>("");
   const { isConnected } = useAccount();
   const navigate = useNavigate();
 
-  const addSInfra = {
-    address: "0x920CCb77F0C95791af4203a7b3bf244da01564aC",
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const addSInfra: any = {
+    address: AddSInfraAddress,
     abi: AddSInfra,
   };
 
-  const { data, isError, isLoading } = useContractReads({
-    contracts: [
-      { address: "0x920CCb77F0C95791af4203a7b3bf244da01564aC", abi: AddSInfra, functionName: "" },
-      {
-        ...addSInfra,
-        functionName: "getIntegratorsList",
-      },
-    ],
-  });
+    const { data, isError, isLoading } = useContractReads({
+      contracts: [
+        {
+          ...addSInfra,
+          functionName: "getPoolsList",
+        },
+        {
+          ...addSInfra,
+          functionName: "getIntegratorsList",
+        },
+      ],
+    });
+
+    console.log({ data,  isError, isLoading  });
+
+    const { chain, chains } = getNetwork()
+
+    console.log({chain, chains})
 
   useEffect(() => {
     if (isConnected && openDashboard === "campaign") {
@@ -37,7 +49,25 @@ const Main = () => {
     }
   }, [isConnected, openDashboard]);
 
-  console.log(openDashboard);
+  useEffect(() => {
+    // async function getData() {
+    //   const data = await readContracts({
+    //     contracts: [
+    //       {
+    //         ...addSInfra,
+    //         functionName: "getPoolsList",
+    //       },
+    //       {
+    //         ...addSInfra,
+    //         functionName: "getIntegratorsList",
+    //       },
+    //     ],
+    //   });
+
+    //   console.log({ data });
+    // }
+    // getData();
+  });
 
   return (
     <div className="flex gap-5 h-screen justify-center items-center">
