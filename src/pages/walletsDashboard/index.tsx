@@ -38,7 +38,7 @@ const WalletDashboard = () => {
     <div>
       <NavBar />
       <Form {...form}>
-        <div className="flex flex-col gap-4 items-center m-auto p-20  ">
+        <div className="flex flex-col gap-4 justify-center h-screen items-center m-auto p-20 w-[400px] ">
           <FormField
             control={form.control}
             name="walletName"
@@ -81,15 +81,15 @@ const WalletDashboard = () => {
                 <FormItem>
                   <FormLabel className="">Wallet Logo </FormLabel>
                   <FormControl>
-                    <Input placeholder="Wallet Logo" type="text" {...field} />
+                    <Input placeholder="Wallet Logo" type="file" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               );
             }}
           />
-          <Button type="submit" className="w-full" onClick={handleSubmitForm}>
-            Create a Campaign
+          <Button type="submit" className="w-fit" onClick={handleSubmitForm}>
+            Get Registered
           </Button>
         </div>
       </Form>
