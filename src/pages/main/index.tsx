@@ -3,29 +3,11 @@ import ConnectWalletButtonWallet from "../../components/WalletButtons/ConnectWal
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useNavigate } from "react-router-dom";
-import { useContractReads } from "wagmi";
-
-import AddSInfra from "../../lib/ABI/AddSInfra";
 
 const Main = () => {
   const [openDashboard, setOpenDashboard] = useState<string>("");
   const { isConnected } = useAccount();
   const navigate = useNavigate();
-
-  const addSInfra = {
-    address: "0x920CCb77F0C95791af4203a7b3bf244da01564aC",
-    abi: AddSInfra,
-  };
-
-  const { data, isError, isLoading } = useContractReads({
-    contracts: [
-      { address: "0x920CCb77F0C95791af4203a7b3bf244da01564aC", abi: AddSInfra, functionName: "" },
-      {
-        ...addSInfra,
-        functionName: "getIntegratorsList",
-      },
-    ],
-  });
 
   useEffect(() => {
     if (isConnected && openDashboard === "campaign") {
