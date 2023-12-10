@@ -1,7 +1,4 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { useAccount } from "wagmi";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 type connectWalletParam = {
   msg: string;

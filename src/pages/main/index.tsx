@@ -8,6 +8,7 @@ import { useContractReads } from "wagmi";
 import { getNetwork } from '@wagmi/core'
 
 import {AddSInfra, AddSInfraAddress} from "../../lib/ABI/AddSInfra";
+import PartneredWallets from "../../components/Cards/PartneredWallets";
 
 const Main = () => {
   const [openDashboard, setOpenDashboard] = useState<string>("");
@@ -72,7 +73,7 @@ const Main = () => {
   return (
     <div className="flex gap-5 h-screen justify-center items-center">
       <div className="w-[500px] h-[700px] flex flex-col gap-5 justify-center items-center">
-        <p className="text-xl font-bold"> Currently Running Campaings</p>
+        <p className="text-xl font-bold"> Advertiser </p>
         <div className="w-[90%] h-full border-2 border-black  rounded-lg px-2 py-4 overflow-y-scroll">
           <CurrentlyRunningCampaings />
         </div>
@@ -93,8 +94,11 @@ const Main = () => {
         />
       </div>
 
-      <div className="w-[400px] h-[600px] flex justify-center items-center">
-        <div className="w-[90%] h-full border-2 border-black "> hello </div>
+      <div className="w-[500px] h-[700px] flex flex-col gap-5 justify-center items-center">
+        <p className="text-xl font-bold"> Integraters </p>
+        <div className="w-[90%] h-full border-2 border-black  rounded-lg px-2 py-4 overflow-y-scroll">
+          <PartneredWallets />
+        </div>
       </div>
     </div>
   );
