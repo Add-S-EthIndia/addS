@@ -90,4 +90,4 @@ export const AddSInfra = [
   },
 ];
 
-export const AddSInfraAddress = '0x920CCb77F0C95791af4203a7b3bf244da01564aC';
+export const AddSInfraAddress = '0x4E4968c25572d58b7fE9E440fd392e399F36CE2c';

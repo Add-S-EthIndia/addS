@@ -448,4 +448,4 @@ export const PoolFactory = [
 	}
 ]
 
-export const PoolFactoryAddress = '0x0804Bc9395183A570549566980a86A3829C745c4';
+export const PoolFactoryAddress = '0x31079F48a7f8064721a695c83a08dE0424Cb9632';

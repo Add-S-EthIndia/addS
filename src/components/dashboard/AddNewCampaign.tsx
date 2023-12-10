@@ -78,7 +78,7 @@ const AddNewCampaign = () => {
       address,
       formData.setBribePercentage,
       formData.setAmountForPool,
-      "https://bafybeibgqcss3pktjmutmov7t46isuyvbxxykgmvnsxybpus7wbmevpkzi.ipfs.dweb.link/", // add IPFS hash
+      "https://bafybeiaewqmznmdb2r73vcrm32jmhf5babixhmf6j7bwlam6jw7wo2sqe4.ipfs.dweb.link/", // add IPFS hash
       formData.setMinimumTransactionAmount,
       ['WalletX']
       
