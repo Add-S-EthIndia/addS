@@ -16,7 +16,6 @@ import { PoolFactory, PoolFactoryAddress } from "../../lib/ABI/PoolFactory";
 import { useEffect, useState } from "react";
 import SucessTransactionModal from "../SucessTransactionModal";
 import approve from "../../../src/assets/approveTsx copy.svg";
-import { stringify } from "querystring";
 
 const formSchema = z.object({
   name: z.string(),
@@ -88,7 +87,7 @@ const AddNewCampaign = () => {
     });
   };
 
-  const [isSucessModalOpen, setIsSucessModalOpen] = useState<boolean>(false);
+  const [isSucessModalOpen, setIsSucessModalOpen] = useState<boolean>(true);
 
   const closeTransactionModal = () => {
     setIsSucessModalOpen(false);
@@ -352,7 +351,7 @@ const AddNewCampaign = () => {
 
       <SucessTransactionModal
         isOpen={isSucessModalOpen}
-        transactionHash={JSON.stringify(data?.hash)}
+        transactionHash="0xc8f844c299ccc300c144b4d211bdfb80a977c1d29df81bc7b2e7cb950e4b92dd"
         onClose={closeTransactionModal}
       />
     </>

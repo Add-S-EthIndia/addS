@@ -1,7 +1,5 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { useAccount } from "wagmi";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type connectWalletParam = {
   msg: string;
@@ -10,10 +8,8 @@ type connectWalletParam = {
 export default function ConnectWalletButton({ msg }: connectWalletParam) {
   const [isClicked, setIsClicked] = useState<boolean>(false);
 
-  const { isConnected } = useAccount();
   const { open } = useWeb3Modal();
 
-  const navigate = useNavigate();
 
   // useEffect(() => {
   //   console.log("THis is from the dashboard of Campaign");
@@ -33,6 +29,7 @@ export default function ConnectWalletButton({ msg }: connectWalletParam) {
         onClick={async () => {
           setIsClicked(true);
           open();
+          console.log(isClicked)
         }}
       >
         {msg}
