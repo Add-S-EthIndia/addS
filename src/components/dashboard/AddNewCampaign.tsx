@@ -87,7 +87,7 @@ const AddNewCampaign = () => {
     });
   };
 
-  const [isSucessModalOpen, setIsSucessModalOpen] = useState<boolean>(true);
+  const [isSucessModalOpen, setIsSucessModalOpen] = useState<boolean>(false);
 
   const closeTransactionModal = () => {
     setIsSucessModalOpen(false);
