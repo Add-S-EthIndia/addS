@@ -7,7 +7,7 @@ import AppRoutes from "./routes";
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
 
 import { WagmiConfig } from "wagmi";
-import { arbitrum, mainnet } from "viem/chains";
+import { polygonMumbai } from "viem/chains";
 
 const projectId = "904623217cd89ca1a411940339ad0a1c";
 
@@ -18,7 +18,7 @@ const metadata = {
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
-const chains = [mainnet, arbitrum];
+const chains = [polygonMumbai];
 const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 
 createWeb3Modal({ wagmiConfig, projectId, chains });

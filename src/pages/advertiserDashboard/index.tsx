@@ -1,8 +1,37 @@
 import NavBar from "../../components/NavBar";
 import AddNewCampaign from "../../components/dashboard/AddNewCampaign";
 import CurrentRunningCampaign from "../../components/dashboard/CurrentRunningCampaign";
+import { useConnect, useContractReads } from "wagmi";
+// import { readContracts } from "@wagmi/core";
+// import { getNetwork } from '@wagmi/core'
+import {PoolFactory, PoolFactoryAddress} from "../../lib/ABI/PoolFactory";
 
 const Dashboard = () => {
+
+  const dataConnect = useConnect()
+
+  console.log({dataConnect })
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const addSInfra: any = {
+    address: PoolFactoryAddress,
+    abi: PoolFactory,
+  };
+
+  const { data, isError, isLoading } = useContractReads({
+    contracts: [
+      {
+        ...addSInfra,
+        functionName: "getPoolsList",
+      },
+      {
+        ...addSInfra,
+        functionName: "getIntegratorsList",
+      },
+    ],
+  });
+
+  console.log({ data,  isError, isLoading  });
+
   return (
     <>
       {/* Main container for all the 3 things  */}
